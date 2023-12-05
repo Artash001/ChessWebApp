@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #000;
+        }
+
+        th {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .even {
+            background-color: #FEFEFE;
+        }
+
+        .odd {
+            background-color: #0D7D00;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+                <th>G</th>
+                <th>H</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 8; i >= 1; i--)
+            {
+                <tr>
+                    <td>@i</td>
+                    @for (char j = 'A'; j <= 'H'; j++)
+                    {
+                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")"></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <h3>Select Chess Piece</h3>
+        <form method="post" action="/Home/PlacePiece">
+            <label for="selectedPiece">Select Piece:</label>
+            <select name="selectedPiece" asp-items="ViewBag.Pieces"></select>
+
+            <label for="selectedCoordinate">Select Coordinate:</label>
+            <input type="text" id="selectedCoordinate" name="selectedCoordinate" />
+
+            <button type="submit">Place Figure</button>
+        </form>
+    </div>
+</body>
+</html>
