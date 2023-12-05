@@ -60,7 +60,7 @@
                     <td>@i</td>
                     @for (char j = 'A'; j <= 'H'; j++)
                     {
-                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")"></td>
+                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")">@ViewBag.Chessboard[i - 1, j - 'A']</td>
                     }
                 </tr>
             }
@@ -72,8 +72,11 @@
             <label for="selectedPiece">Select Piece:</label>
             <select name="selectedPiece" asp-items="ViewBag.Pieces"></select>
 
+            <label for="selectedColor">Select Piece:</label>
+            <select name="selectedColor" asp-items="ViewBag.Color"></select>
+
             <label for="selectedCoordinate">Select Coordinate:</label>
-            <input type="text" id="selectedCoordinate" name="selectedCoordinate" />
+            <input type="text" name="selectedCoordinate" />
 
             <button type="submit">Place Figure</button>
         </form>
