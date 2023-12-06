@@ -12,7 +12,7 @@ public class HomeController : Controller
     private static string[,] chessboard = new string[8, 8];
 
     [HttpPost]
-    public IActionResult PlacePiece(string selectedPiece,string selectedCoordinate, string selectedColor)
+    public IActionResult PlacePiece(string selectedPiece, string selectedCoordinate, string selectedColor)
     {
         int.TryParse(selectedCoordinate.Substring(1), out int row);
         int column = selectedCoordinate[0] - 'A';
