@@ -19,7 +19,7 @@ public class HomeController : Controller
         chessboard[row - 1, column] = selectedPiece;
         ViewBag.Chessboard = chessboard;
         ViewBag.Pieces = GetPieces();
-        ViewBag.Color = selectedColor;
+        ViewBag.Color = GetColor();
         return View("Index");
     }
 
@@ -27,6 +27,7 @@ public class HomeController : Controller
     {
         ViewBag.ChessBoard = chessboard;
         ViewBag.Pieces = GetPieces();
+        ViewBag.Color = GetColor();
         return View();
     }
 
@@ -34,5 +35,11 @@ public class HomeController : Controller
     {
         string[] pieces = new string[] { "King", "Knight", "Rook", "Queen", "Bishop" };
         return new SelectList(pieces);
+    }
+
+    private SelectList GetColor()
+    {
+        string[] color = new string[] { "Black", "White" };
+        return new SelectList(color);
     }
 }
