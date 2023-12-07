@@ -65,7 +65,11 @@
                     <td>@i</td>
                     @for (char j = 'A'; j <= 'H'; j++)
                     {
-                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")">@ViewBag.Chessboard[i - 1, j - 'A']</td>
+                        @if (i - 1 == null && j - 'A' == null)
+                        {
+                            <td class="@((i + j) % 2 == 0 ? "even" : "odd")"></td>
+                        }
+                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")" style="font-size: 30px">@ViewBag.Chessboard[i - 1, j - 'A']</td>
                     }
                 </tr>
             }

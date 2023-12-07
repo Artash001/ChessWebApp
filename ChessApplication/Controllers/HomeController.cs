@@ -30,13 +30,13 @@ public class HomeController : Controller
 
     private SelectList GetPieces()
     {
-        string[] pieces = new string[] { "King", "Knight", "Rook", "Queen", "Bishop" };
+        string[] pieces = ["King", "Knight", "Rook", "Queen", "Bishop"];
         return new SelectList(pieces);
     }
 
     private SelectList GetColor()
     {
-        string[] color = new string[] { "Black", "White" };
+        string[] color = ["Black", "White"];
         return new SelectList(color);
     }
 }
