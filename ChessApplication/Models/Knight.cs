@@ -1,20 +1,24 @@
-namespace ChessApplication.Models;
+﻿namespace ChessApplication.Models;
 
 
 
-    public class Knight : IFigure
-    {
-        private char figureSymbol = 'H';
-        public ConsoleColor color{get; set;}
+public class Knight : IFigure
+{
+        public string color{get; set;}
 
-        public Knight(ConsoleColor color)
+        public Knight(string Color)
         {
-            this.color = color;
+            color = Color;
         }
 
-        public  char GetSymbol()
+        public string GetSymbol()
         {
-            return figureSymbol;
+            if (color == "White")
+            {
+                return "♘";
+            }
+            else
+                return "♞";
         }
          
         public  bool CanMoveToPosition(int[] newPosition, int[] coordinates)
@@ -47,41 +51,8 @@ namespace ChessApplication.Models;
             return 0;
         }
 
-        // public int MinStepsRecursive(int[] currentPosition, int[] destination)
-        // {
-        //     int[] dx = { 2, 1, -1, -2, -2, -1, 1, 2 };
-        //     int[] dy = { 1, 2, 2, 1, -1, -2, -2, -1 };
-
-        //     if (currentPosition[0] == destination[0] && currentPosition[1] == destination[1])
-        //     {
-        //         // Destination reached, return 0 steps.
-        //         return 0;
-        //     }
-
-        //     int minSteps = int.MaxValue;
-
-        //     // Explore all possible moves from the current position.
-        //     for (int move = 0; move < 8; move++)
-        //     {
-        //         int newRow = currentPosition[0] + dx[move];
-        //         int newCol = currentPosition[1] + dy[move];
-
-        //         if (newRow >= 0 && newCol >= 0)
-        //         {
-        //             int steps = MinStepsRecursive(new int[] { newRow, newCol }, destination);
-
-        //             if (steps != int.MaxValue)
-        //             {
-        //                 // If a valid path is found, update minSteps.
-        //                 minSteps = Math.Min(minSteps, steps + 1);
-        //             }
-        //         }
-        //     }
-        //     return minSteps;
-        // }
-
         public  void Attack() { }
         public  void Move() { }    
-    }
+}
 
 

@@ -1,20 +1,24 @@
-namespace ChessApplication.Models;
+﻿namespace ChessApplication.Models;
 
 
 
-    public class Rook : IFigure
-    {
-        private char figureSymbol = 'R';
-        public ConsoleColor color{get; set;}
+public class Rook : IFigure
+{
+        public string color{get; set;}
 
-        public Rook(ConsoleColor color)
+        public Rook(string Color)
         {
-            this.color = color;        
+            color = Color;        
         }
 
-        public  char GetSymbol()
+        public string GetSymbol()
         {
-            return figureSymbol;
+            if (color == "White")
+            {
+                return "♖";
+            }
+            else
+                return "♜";
         }
 
         public bool CanMoveToPosition(int[] newPosition, int[] coordinates)
@@ -27,5 +31,5 @@ namespace ChessApplication.Models;
 
         public  void Attack() { }
         public  void Move() { }
-    }
+}
 

@@ -1,26 +1,30 @@
-namespace ChessApplication.Models;
+﻿namespace ChessApplication.Models;
 
 
-    public class King : IFigure
+public class King : IFigure
+{
+    private string color;
+
+    public King(string Color)
     {
-        private char figureSymbol = 'K';
-        public ConsoleColor color{get; set;}
-
-        public King(ConsoleColor color)
-            {
-                this.color = color;
-                
-            }
-
-
-        public  char GetSymbol()
-        {
-            return figureSymbol;
-        }
-
-        public  void Attack() { }
-        public  void Move() { }
-        
-        public  bool CanMoveToPosition(int[] newPosition, int[] coordinates)  {return true;}
+        color = Color;
     }
+
+
+    public string GetSymbol()
+    {
+        if (color == "White")
+        {
+            return "♔";
+        }
+        else
+            return "♚";
+    }
+
+
+    public void Attack() { }
+    public void Move() { }
+
+    public bool CanMoveToPosition(int[] newPosition, int[] coordinates) { return true; }
+}
 

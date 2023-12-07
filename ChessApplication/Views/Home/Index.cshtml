@@ -73,7 +73,7 @@
     </table>
     <div>
         <h3>Select Chess Piece</h3>
-        <form method="post" action="/Home/PlacePiece">
+        <form method="post" asp-action="PlacePiece">
             <label for="selectedPiece">Select Piece:</label>
             <select name="selectedPiece" asp-items="ViewBag.Pieces"></select>
 
@@ -83,8 +83,35 @@
             <label for="selectedCoordinate">Select Coordinate:</label>
             <input type="text" name="selectedCoordinate" />
 
-            <button type="submit">Place Figure</button>
+            <button type="submit" onclick="updateSelectedPieceSymbol()">Place Figure</button>
         </form>
+        <div id="selectedPieceSymbol"></div>
     </div>
+
+    <script>
+        function updateSelectedPieceSymbol() {
+            var selectedPieceDropdown = document.getElementById('selectedPiece');
+            var selectedPieceSymbol = document.getElementById('selectedPieceSymbol');
+
+            var selectedPiece = selectedPieceDropdown.value;
+            // You may need to fetch the corresponding Unicode or symbol for the selected piece
+            // For simplicity, let's assume a direct mapping between pieces and Unicode symbols
+            var pieceSymbol = getPieceSymbol(selectedPiece);
+            selectedPieceSymbol.innerText = pieceSymbol;
+        }
+
+        function getPieceSymbol(piece) {
+            // Implement your logic to map pieces to symbols here
+            // For example, you can have a dictionary or switch statement
+            // that returns the corresponding symbol based on the selected piece
+            switch (piece) {
+                case "King":
+                    return "♚";
+                // Add more cases for other pieces
+                default:
+                    return "";
+            }
+        }
+    </script>
 </body>
 </html>

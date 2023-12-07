@@ -9,15 +9,12 @@ namespace ChessApplication.Controllers;
 
 public class HomeController : Controller
 {
-    private static string[,] chessboard = new string[8, 8];
+    private static ChessBoard chessBoard = new ChessBoard(new string[8,8]);
 
     [HttpPost]
     public IActionResult PlacePiece(string selectedPiece, string selectedCoordinate, string selectedColor)
     {
-        int.TryParse(selectedCoordinate.Substring(1), out int row);
-        int column = selectedCoordinate[0] - 'A';
-        chessboard[row - 1, column] = selectedPiece;
-        ViewBag.Chessboard = chessboard;
+        ViewBag.Chessboard = chessBoard.PlaceFigure(selectedCoordinate, selectedPiece, selectedColor);
         ViewBag.Pieces = GetPieces();
         ViewBag.Color = GetColor();
         return View("Index");
@@ -25,7 +22,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        ViewBag.ChessBoard = chessboard;
+        ViewBag.ChessBoard = chessBoard.board;
         ViewBag.Pieces = GetPieces();
         ViewBag.Color = GetColor();
         return View();
