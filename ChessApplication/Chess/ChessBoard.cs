@@ -40,6 +40,14 @@ public class ChessBoard
         //GetSymbol funciayi kariq cher lini
 
     }
+
+    public void RemoveFigure(string Coordinate)
+    {
+        int.TryParse(Coordinate.Substring(1), out int row);
+        int column = Coordinate[0] - 'A';
+
+        board[row - 1, column] = null;
+    }
 }
     
 

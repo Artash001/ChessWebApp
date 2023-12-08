@@ -12,9 +12,18 @@ public class HomeController : Controller
     private static ChessBoard chessBoard = new ChessBoard(new string[8,8]);
 
     [HttpPost]
-    public IActionResult PlacePiece(string selectedPiece, string selectedCoordinate, string selectedColor)
+    public IActionResult PlacePiece(string selectedPiece, string? selectedCoordinate, string selectedColor, string? destinationCoordinate)
     {
-        ViewBag.Chessboard = chessBoard.PlaceFigure(selectedCoordinate, selectedPiece, selectedColor);
+        if(destinationCoordinate != null)
+        {
+            chessBoard.RemoveFigure(selectedCoordinate);
+            ViewBag.Chessboard = chessBoard.PlaceFigure(destinationCoordinate, selectedPiece, selectedColor);
+           // destinationCoordinate = null;
+        }
+        else
+        {
+            ViewBag.Chessboard = chessBoard.PlaceFigure(selectedCoordinate, selectedPiece, selectedColor);
+        }
         ViewBag.Pieces = GetPieces();
         ViewBag.Color = GetColor();
         return View("Index");

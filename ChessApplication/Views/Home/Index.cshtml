@@ -10,6 +10,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess Board</title>
     <style>
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #000;
+        }
+
+        th {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .even {
+            background-color: #FEFEFE;
+        }
+
+        .odd {
+            background-color: #0D7D00;
+        }
+
+        #piecetd {
+            background-color: #0D7D00;
+        }
+
+        }
+        .draggable {
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+                <th>G</th>
+                <th>H</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 8; i >= 1; i--)
+            {
+                <tr>
+                    <td>@i</td>
+                    @for (char j = 'A'; j <= 'H'; j++)
+                    {
+                        <td class="@((i + j) % 2 == 0 ? "even" : "odd")" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            @if (i - 1 != null && j - 'A' != null)
+                            {
+                                <div class="draggable" draggable="true" ondragstart="drag(event)">
+                                    @ViewBag.Chessboard[i - 1, j - 'A']
+                                </div>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <h3>Select Chess Piece</h3>
+        <form method="post" asp-action="PlacePiece" onsubmit="return submitForm()">
+            <label for="selectedPiece">Select Piece:</label>
+            <select name="selectedPiece" asp-items="ViewBag.Pieces"></select>
+
+            <label for="selectedColor">Select Color:</label>
+            <select name="selectedColor" asp-items="ViewBag.Color"></select>
+
+            <input type="hidden" for="destinationCoordinate" id="destinationCoordinate" name="destinationCoordinate" />
+
+            <label for="selectedCoordinate">Select Coordinate:</label>
+            <input type="text" id="selectedCordinate" name="selectedCoordinate" />
+
+            <button type="submit" onclick="updateSelectedPieceSymbol()">Place Figure</button>
+        </form>
+        <div id="selectedPieceSymbol"></div>
+    </div>
+    <script>
+        var sourceSquare;
+
+        function drag(ev) {
+            // Set the data to be transferred during drag  
+            ev.dataTransfer.setData("text/plain", ev.target.innerText);
+
+            // Set the source square
+            sourceSquare = String.fromCharCode(65 + ev.target.parentElement.cellIndex - 1) + (9 - ev.target.parentElement.parentElement.rowIndex);
+        }
+
+        function allowDrop(ev) {
+            // Prevent the default behavior to allow dropping
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            // Prevent the default behavior
+            ev.preventDefault();
+
+            // Set the destination square
+            var destinationSquare = String.fromCharCode(65 + ev.target.cellIndex - 1) + (9 - ev.target.parentElement.rowIndex);
+
+            // Log the source and destination squares
+            console.log("Source Square: " + sourceSquare);
+            console.log("Destination Square: " + destinationSquare);
+
+            // Set the destination coordinate in the hidden input field
+            document.getElementById('destinationCoordinate').value = destinationSquare;
+            document.getElementById('selectedCordinate').value = sourceSquare;
+
+            // Submit the form
+            document.forms[0].submit();
+        }
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+    <style>
         table {
             border-collapse: collapse;
         }
@@ -119,3 +286,4 @@
     </script>
 </body>
 </html>
+ *@
