@@ -73,7 +73,7 @@
                         <td class="@((i + j) % 2 == 0 ? "even" : "odd")" ondrop="drop(event)" ondragover="allowDrop(event)">
                             @if (i - 1 != null && j - 'A' != null)
                             {
-                                <div class="draggable" draggable="true" ondragstart="drag(event)">
+                                <div class="draggable" draggable="true" ondragstart="drag(event)" style="font-size: 30px">
                                     @ViewBag.Chessboard[i - 1, j - 'A']
                                 </div>
                             }
