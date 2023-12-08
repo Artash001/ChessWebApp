@@ -1,4 +1,4 @@
-﻿namespace ChessApplication.Models;
+﻿namespace ChessLibrary.Figures;
 
 public interface IFigure
 {   

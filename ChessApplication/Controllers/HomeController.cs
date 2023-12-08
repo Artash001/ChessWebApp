@@ -1,9 +1,9 @@
 using ChessApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ChessApplication.Chess;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.Common;
+using ChessLibrary.Chess;
 
 namespace ChessApplication.Controllers;
 
@@ -39,7 +39,7 @@ public class HomeController : Controller
 
     private SelectList GetPieces()
     {
-        string[] pieces = ["King", "Knight", "Rook", "Queen", "Bishop"];
+        string[] pieces = ["King", "Knight", "Rook", "Queen", "Bishop", "Pawn"];
         return new SelectList(pieces);
     }
 

@@ -1,11 +1,11 @@
-﻿namespace ChessApplication.Models;
+﻿namespace ChessLibrary.Figures;
 
 
-public class King : IFigure
+public class Bishop : IFigure
 {
     private string color;
 
-    public King(string Color)
+    public Bishop(string Color)
     {
         color = Color;
     }
@@ -15,10 +15,10 @@ public class King : IFigure
     {
         if (color == "White")
         {
-            return "♔";
+            return "♗";
         }
         else
-            return "♚";
+            return "♝";
     }
 
 

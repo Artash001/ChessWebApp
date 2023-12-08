@@ -1,7 +1,7 @@
-﻿using ChessApplication.Models;
+﻿using ChessLibrary.Figures;
 using System.Net.Http.Headers;
 
-namespace ChessApplication.Chess;
+namespace ChessLibrary.Chess;
 
 
 public class ChessBoard
@@ -13,7 +13,7 @@ public class ChessBoard
         board = size;
     }
 
-    public string[,] PlaceFigure(string Coordinate,  string Figure, string Color)
+    public string[,] PlaceFigure(string Coordinate, string Figure, string Color)
     {
         int.TryParse(Coordinate.Substring(1), out int row);
         int column = Coordinate[0] - 'A';
@@ -31,14 +31,21 @@ public class ChessBoard
                 Rook rook = new Rook(Color);
                 Figure = rook.GetSymbol();
                 break;
+            case "Queen":
+                Queen queen = new Queen(Color);
+                Figure = queen.GetSymbol();
+                break;
+            case "Bishop":
+                Bishop bishop = new Bishop(Color);
+                Figure = bishop.GetSymbol();
+                break;
+            case "Pawn":
+                Pawn pawn = new Pawn(Color);
+                Figure = pawn.GetSymbol();
+                break;
         }
         board[row - 1, column] = Figure;
         return board;
-
-        //Cher kareli sa anel aranc string veradarcnelu ?
-        //Kveradardzni object
-        //GetSymbol funciayi kariq cher lini
-
     }
 
     public void RemoveFigure(string Coordinate)
@@ -49,5 +56,5 @@ public class ChessBoard
         board[row - 1, column] = null;
     }
 }
-    
+
 
